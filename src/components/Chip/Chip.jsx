@@ -1,11 +1,21 @@
 import * as React from "react"
 import "./Chip.css"
+import { useState } from "react";
 
-export function Chip({ label = "", isActive = false }) {
+export function Chip({ handleOnClick, label = "", isActive = false, menu }) {
+  var buttonClassName;
+  if (isActive) {
+    buttonClassName = "chip active"
+  } else {
+    buttonClassName = "chip";
+  }
+
   return (
-    <button className="chip">
-      <p className="label"></p>
-      <span className="close" role="button">{`X`}</span>
+    <button className={buttonClassName} onClick={()=>{
+      menu ? handleOnClick(menu) : handleOnClick(label)
+      }} >
+      <p className="label">{label}</p>
+      <span className="close" role="button" >{`X`}</span>
     </button>
   )
 }
